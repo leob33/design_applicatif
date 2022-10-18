@@ -1,7 +1,8 @@
 from hostel_management.hostel_bdd import HostelDB
 from hostel_management.domain.user_side.hostel_manager import HostelManager
 from hostel_management.domain.application.room import Room
-from hostel_management.domain.server_side.interface_hostel_data_source import InterfaceHostelDataSource
+from tests.tu.server_side.hostel_db_stub_test import HostelDbStubRdcTest, HostelDbStubFirstFloorTest, \
+    HostelDbStubSecondFloorTest, HostelDbStubThirdFloorTest, HostelDbStubRoomMax200Test
 
 
 def test_list_rooms_returns_list_of_rooms():
@@ -18,13 +19,6 @@ def test_list_rooms_returns_list_of_rooms():
     assert list_of_rooms == expected_list_of_rooms
 
 
-class HostelDbStubRdcTest(InterfaceHostelDataSource):
-    def list_hostel_rooms(self) -> list[dict]:
-        hostel_rooms_list = [
-            {'étage': 0, 'numéro': 1, 'prix': 50}]
-        return hostel_rooms_list
-
-
 def test_rdc_price_room():
     rdc_price = 20
     expected_list_of_rooms = [Room(0, 1, rdc_price)]
@@ -33,15 +27,6 @@ def test_rdc_price_room():
     hostel_manager.update_list_of_rooms(rdc_price=rdc_price)
 
     assert hostel_manager.list_of_rooms == expected_list_of_rooms
-
-
-class HostelDbStubFirstFloorTest(InterfaceHostelDataSource):
-    def list_hostel_rooms(self) -> list[dict]:
-        hostel_rooms_list = [
-            {'étage': 1, 'numéro': 1, 'prix': 20},
-            {'étage': 0, 'numéro': 1, 'prix': 20},
-        ]
-        return hostel_rooms_list
 
 
 def test_1er_etage_room():
@@ -55,14 +40,6 @@ def test_1er_etage_room():
     assert hostel_manager.list_of_rooms == expected_list_of_rooms
 
 
-class HostelDbStubSecondFloorTest(InterfaceHostelDataSource):
-    def list_hostel_rooms(self) -> list[dict]:
-        hostel_rooms_list = [
-            {'étage': 2, 'numéro': 1, 'prix': 20},
-        ]
-        return hostel_rooms_list
-
-
 def test_2eme_etage_room():
     rdc_price = 50
     expected_list_of_rooms = [Room(2, 1, rdc_price * 1.22)]
@@ -73,14 +50,6 @@ def test_2eme_etage_room():
     assert hostel_manager.list_of_rooms == expected_list_of_rooms
 
 
-class HostelDbStubThirdFloorTest(InterfaceHostelDataSource):
-    def list_hostel_rooms(self) -> list[dict]:
-        hostel_rooms_list = [
-            {'étage': 3, 'numéro': 1, 'prix': 20},
-        ]
-        return hostel_rooms_list
-
-
 def test_3eme_etage_room():
     rdc_price = 50
     expected_list_of_rooms = [Room(3, 1, rdc_price * 1.33)]
@@ -89,15 +58,6 @@ def test_3eme_etage_room():
     hostel_manager.update_list_of_rooms(rdc_price=rdc_price)
 
     assert hostel_manager.list_of_rooms == expected_list_of_rooms
-
-
-class HostelDbStubRoomMax200Test(InterfaceHostelDataSource):
-    def list_hostel_rooms(self) -> list[dict]:
-        hostel_rooms_list = [
-            {'étage': 0, 'numéro': 1, 'prix': 20},
-            {'étage': 3, 'numéro': 1, 'prix': 20},
-        ]
-        return hostel_rooms_list
 
 
 def test_max_room_price():
