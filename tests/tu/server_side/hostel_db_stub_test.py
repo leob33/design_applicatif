@@ -1,42 +1,12 @@
-from hostel_management.domain.server_side.interface_hostel_data_source import InterfaceHostelDataSource
+from hostel_management.domain.model.hostel import Hostel
+from hostel_management.domain.repository.hotel_repository import HotelRepository
+from hostel_management.domain.model.room import Room
 
 
-class HostelDbStubRdcTest(InterfaceHostelDataSource):
-    def list_hostel_rooms(self) -> list[dict]:
-        hostel_rooms_list = [
-            {'étage': 0, 'numéro': 1, 'prix': 50}]
-        return hostel_rooms_list
+class HostelDbStub(HotelRepository):
 
+    def __init__(self, list_of_rooms: list[Room]):
+        self._list_of_rooms = list_of_rooms
 
-class HostelDbStubFirstFloorTest(InterfaceHostelDataSource):
-    def list_hostel_rooms(self) -> list[dict]:
-        hostel_rooms_list = [
-            {'étage': 1, 'numéro': 1, 'prix': 20},
-            {'étage': 0, 'numéro': 1, 'prix': 20},
-        ]
-        return hostel_rooms_list
-
-
-class HostelDbStubSecondFloorTest(InterfaceHostelDataSource):
-    def list_hostel_rooms(self) -> list[dict]:
-        hostel_rooms_list = [
-            {'étage': 2, 'numéro': 1, 'prix': 20},
-        ]
-        return hostel_rooms_list
-
-
-class HostelDbStubThirdFloorTest(InterfaceHostelDataSource):
-    def list_hostel_rooms(self) -> list[dict]:
-        hostel_rooms_list = [
-            {'étage': 3, 'numéro': 1, 'prix': 20},
-        ]
-        return hostel_rooms_list
-
-
-class HostelDbStubRoomMax200Test(InterfaceHostelDataSource):
-    def list_hostel_rooms(self) -> list[dict]:
-        hostel_rooms_list = [
-            {'étage': 0, 'numéro': 1, 'prix': 20},
-            {'étage': 3, 'numéro': 1, 'prix': 20},
-        ]
-        return hostel_rooms_list
+    def get_hostel(self) -> Hostel:
+        return Hostel(rooms=self._list_of_rooms)
