@@ -9,7 +9,7 @@ class Price:
             new_price = Price(200)
         return new_price
 
-    def __eq__(self, other):
+    def __eq__(self, other: 'Price'):
         if self._value == other._value:
             return True
         else:

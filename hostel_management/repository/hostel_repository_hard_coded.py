@@ -1,4 +1,6 @@
 from hostel_management.domain.model.hostel import Hostel
+from hostel_management.domain.model.price import Price
+from hostel_management.domain.model.room import Room
 from hostel_management.domain.repository.hotel_repository import HotelRepository
 
 
@@ -9,4 +11,9 @@ class HotelRepositoryHardCoded(HotelRepository):
     """
 
     def get_hostel(self) -> Hostel:
-        raise NotImplementedError()
+        rooms = [Room(0, 1, Price(120)),
+                 Room(1, 1, Price(120)),
+                 Room(2, 1, Price(120)),
+                 Room(3, 1, Price(120))]
+
+        return Hostel(rooms=rooms)
