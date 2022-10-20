@@ -11,7 +11,7 @@ class Room:
 
     def update_price(self, rdc_price: Price):
         if self.floor == 0:
-            self.price = rdc_price
+            self.price = rdc_price.calculate_price(0)
         elif self.floor == 1:
             self.price = rdc_price.calculate_price(7)
         elif self.floor == 2:

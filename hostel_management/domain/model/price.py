@@ -14,3 +14,7 @@ class Price:
             return True
         else:
             return False
+
+    def __repr__(self):
+        return str(self._value)
+

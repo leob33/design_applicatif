@@ -9,7 +9,4 @@ class HotelRepositoryHardCoded(HotelRepository):
     """
 
     def get_hostel(self) -> Hostel:
-        pass
-
-    def list_hostel_rooms(self) -> list[dict]:
         raise NotImplementedError()

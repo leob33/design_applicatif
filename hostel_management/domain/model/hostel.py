@@ -3,6 +3,7 @@ from hostel_management.domain.model.room import Room
 
 
 class Hostel:
+
     def __init__(self, rooms: list[Room]):
         self._rooms = rooms
 
@@ -18,4 +19,6 @@ class Hostel:
                 break
         return is_equal
 
+    def __repr__(self):
+        return "".join([str(room) for room in self._rooms])
 
